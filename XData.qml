@@ -143,7 +143,17 @@ Item {
     }
     function getJSON() {
         var request = new XMLHttpRequest()
-        request.open('GET', 'file:./data/'+cbPlanetas.currentText+'.json', true);
+
+        //Url GitHub Raw Data
+        //https://github.com/nextsigner/quiron/raw/main/data/pluton.json
+
+        //Url File Local Data
+        //'file:///home/ns/Documentos/unik/quiron/data/neptuno.json'
+
+        let jsonFileUrl='file://'+pws+'/quiron/data/'+cbPlanetas.currentText+'.json'
+        console.log('jsonFileUrl: '+jsonFileUrl)
+        request.open('GET', jsonFileUrl, true);
+        //request.open('GET', 'https://github.com/nextsigner/quiron/raw/main/data/'+cbPlanetas.currentText+'.json', true);
         request.onreadystatechange = function() {
             if (request.readyState === XMLHttpRequest.DONE) {
                 if (request.status && request.status === 200) {

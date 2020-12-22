@@ -6,9 +6,9 @@ import Qt.labs.settings 1.0
 ApplicationWindow {
         id: app
         visible: true
-        visibility: "Maximized"
-        width: Screen.width
-        height: Screen.height
+        visibility: Qt.platform.os==='android'?"Maximized":"Windowed"
+        width: Qt.platform.os==='android'?Screen.width:300
+        height: Qt.platform.os==='android'?Screen.height:600
         title: 'Mercurio Data para Android'
         color: c1
         property string moduleName: 'mddg'//Mercurio Data Desktop Gadget
