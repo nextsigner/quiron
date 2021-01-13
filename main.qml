@@ -18,7 +18,7 @@ ApplicationWindow {
         property color c3: 'red'
         property color c4: 'green'
 
-        property var planetas: ['seleccionar','neptuno', 'pluton']
+        property var planetas: ['seleccionar','neptuno', 'pluton', 'urano']
         property var signos: ['seleccionar','aries', 'tauro','geminis', 'cancer', 'leo', 'virgo','libra', 'escorpio', 'sagitario', 'capricornio', 'acuario', 'piscis']
 
         Settings{
