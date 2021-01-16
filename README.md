@@ -1,3 +1,3 @@
 # quiron
 
-Repositorio main is the official repository.
+Repositorio master is the official repository.
