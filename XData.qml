@@ -5,7 +5,8 @@ Item {
     id: r
     anchors.fill: parent
     property bool desplegado: cbPlanetas.currentIndex!==0
-    signal flickYChanged(bool b)
+    property alias contentY: flick.contentY
+    signal flickYChanged()
     Flickable{
         id: flick
         anchors.fill: r
@@ -13,7 +14,8 @@ Item {
         contentHeight: col1.height+app.fs*8
         property int uContentY: 0
         onContentYChanged: {
-            if(contentY===0){
+           r.flickYChanged()
+            /* if(contentY===0){
                 r.flickYChanged(false)
                 return
             }
@@ -22,7 +24,7 @@ Item {
             }else{
                  r.flickYChanged(true)
             }
-            uContentY=contentY
+            uContentY=contentY*/
         }
         Column{
             id: col1

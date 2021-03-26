@@ -12,7 +12,7 @@ ApplicationWindow {
         title: 'Quirón'
         color: c1
         property string moduleName: 'quiron'//Mercurio Data Desktop Gadget
-        property int fs: Qt.platform.os==='android'?width*0.08:width*0.06
+        property int fs: Qt.platform.os==='android'?width*0.06:width*0.06
         property color c1: 'black'
         property color c2: 'white'
         property color c3: 'red'
@@ -32,11 +32,13 @@ ApplicationWindow {
             XData{
                 id: xData
                 onFlickYChanged: {
-                    xTopBar.state=b?'inactivo':'activo'
-                    console.log('flick:'+b)
+                    xTopBar.state=xData.contentY===0?'activo':'inactivo'
                 }
             }
-            XTopBar{id: xTopBar}
+            XTopBar{
+                id: xTopBar
+                //state: xData.contentY===0?'activo':'inactivo'
+            }
         }
         Component.onCompleted: {          
             xData.a1()
