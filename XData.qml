@@ -5,15 +5,29 @@ Item {
     id: r
     anchors.fill: parent
     property bool desplegado: cbPlanetas.currentIndex!==0
+    signal flickYChanged(bool b)
     Flickable{
         id: flick
         anchors.fill: r
         contentWidth: r.width
-        contentHeight: col1.height+app.fs*4
+        contentHeight: col1.height+app.fs*8
+        property int uContentY: 0
+        onContentYChanged: {
+            if(contentY===0){
+                r.flickYChanged(false)
+                return
+            }
+            if(contentY<uContentY){
+                r.flickYChanged(false)
+            }else{
+                 r.flickYChanged(true)
+            }
+            uContentY=contentY
+        }
         Column{
             id: col1
             anchors.top: parent.top
-            anchors.topMargin: app.fs
+            anchors.topMargin: app.fs*5
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: app.fs*2
             Row{
