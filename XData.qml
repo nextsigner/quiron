@@ -61,6 +61,7 @@ Item {
                     }
                 }
             }
+            XPlanetas{id: xPlanetas}
             Row{
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: app.fs*2

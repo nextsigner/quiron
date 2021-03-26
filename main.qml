@@ -1,7 +1,7 @@
-import QtQuick 2.7
-import QtQuick.Controls 2.0
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import QtQuick.Window 2.12
-import Qt.labs.settings 1.0
+import Qt.labs.settings 1.1
 
 ApplicationWindow {
         id: app
@@ -25,6 +25,32 @@ ApplicationWindow {
             id: apps
             fileName: app.moduleName+'.cfg'
             property int fs: 14
+        }
+        USettings{
+            id: unikSettings
+            //url:pws+'/launcher.json'
+            url:pws+'/quiron.json'
+            function refresh(){
+                var nc=unikSettings.currentNumColor
+                if(unikSettings.defaultColors){
+                    var cc1=unikSettings.defaultColors.split('|')
+                    var cc2=cc1[nc].split('-')
+                    app.c1=cc2[0]
+                    app.c2=cc2[1]
+                    app.c3=cc2[2]
+                    app.c4=cc2[3]
+                    app.visible=true
+                }
+            }
+            Component.onCompleted: refresh()
+            onDataChanged:  refresh()
+            onCurrentNumColorChanged: {
+                if(unikSettings.sound&&currentNumColor>=0){
+                    let s=unikSettings.lang==='es'?'Color actual ':'Current color  '
+                    s+=parseInt(currentNumColor+1)
+                    speak(s)
+                }
+            }
         }
         Item{
             id: xApp
