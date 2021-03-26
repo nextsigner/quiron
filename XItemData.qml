@@ -9,7 +9,7 @@ Rectangle {
     property string text
     border.width: 2
     border.color: app.c2
-    radius: app.fs
+    radius: app.fs*0.25
     Text{
         id: textData
         text: r.text
@@ -18,5 +18,25 @@ Rectangle {
         width: r.width-apps.fs
         wrapMode: Text.WordWrap
         anchors.centerIn: parent
+    }
+    Row{
+        Repeater{
+            model: 3
+            Item{
+                width: r.width/3
+                height: r.height
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        if(index===0){
+                            apps.fs--
+                        }
+                        if(index===2){
+                            apps.fs++
+                        }
+                    }
+                }
+            }
+        }
     }
 }

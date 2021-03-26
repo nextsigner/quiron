@@ -12,23 +12,37 @@ Item {
         contentHeight: col1.height+app.fs*4
         Column{
             id: col1
+            anchors.top: parent.top
+            anchors.topMargin: app.fs
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: app.fs*2
-            ComboBox{
-                id: cbPlanetas
-                font.pixelSize: app.fs*2
-                anchors.horizontalCenter: parent.horizontalCenter
-                model: app.planetas
-                onCurrentIndexChanged: updateData()
-                Rectangle{
-                    width: parent.width+4
-                    height: parent.height+4
-                    color: 'transparent'
-                    border.width: 3
-                    border.color: 'red'
-                    //z: parent.z-1
-                    anchors.centerIn: parent
-                    visible: parent.focus
+            Row{
+                spacing: app.fs*0.5
+                Text{
+                    id: labelPlanetas
+                    text: 'Planeta: '
+                    font.pixelSize: app.fs
+                    color: app.c2
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                ComboBox{
+                    id: cbPlanetas
+                    font.pixelSize: app.fs
+                    width: r.width-labelPlanetas.contentWidth-app.fs
+                    anchors.verticalCenter: parent.verticalCenter
+                    //anchors.horizontalCenter: parent.horizontalCenter
+                    model: app.planetas
+                    onCurrentIndexChanged: updateData()
+                    Rectangle{
+                        width: parent.width+4
+                        height: parent.height+4
+                        color: 'transparent'
+                        border.width: 3
+                        border.color: 'red'
+                        //z: parent.z-1
+                        anchors.centerIn: parent
+                        visible: parent.focus
+                    }
                 }
             }
             Row{
@@ -74,50 +88,63 @@ Item {
                     }
                 }
             }
-            ComboBox{
-                id: cbSignos
-                font.pixelSize: app.fs*2
-                anchors.horizontalCenter: parent.horizontalCenter
-                model: app.signos
-                visible: rb1.checked
-                onCurrentIndexChanged: {
-                    r.updateData()
+            Row{
+                spacing: app.fs*0.5
+                Text{
+                    id: labelSignosCasas
+                    text: cbSignos.visible?'Signos: ':'Casas: '
+                    font.pixelSize: app.fs
+                    color: app.c2
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: cbSignos.visible||cbCasas.visible
                 }
-                Rectangle{
-                    width: parent.width+4
-                    height: parent.height+4
-                    color: 'transparent'
-                    border.width: 3
-                    border.color: 'red'
-                    //z: parent.z-1
-                    anchors.centerIn: parent
-                    visible: parent.focus
+                ComboBox{
+                    id: cbSignos
+                    font.pixelSize: app.fs
+                    width: r.width-labelSignosCasas.contentWidth-app.fs
+                    anchors.verticalCenter: parent.verticalCenter
+                    model: app.signos
+                    visible: rb1.checked
+                    onCurrentIndexChanged: {
+                        r.updateData()
+                    }
+                    Rectangle{
+                        width: parent.width+4
+                        height: parent.height+4
+                        color: 'transparent'
+                        border.width: 3
+                        border.color: 'red'
+                        //z: parent.z-1
+                        anchors.centerIn: parent
+                        visible: parent.focus
+                    }
                 }
-            }
-            ComboBox{
-                id: cbCasas
-                font.pixelSize: app.fs*2
-                anchors.horizontalCenter: parent.horizontalCenter
-                model: ['Seleccionar Casa', '1','2','3','4','5','6','7','8','9','10','11','12']
-                visible: rb2.checked
-                onCurrentIndexChanged: {
-                    r.updateData()
-                }
-                Rectangle{
-                    width: parent.width+4
-                    height: parent.height+4
-                    color: 'transparent'
-                    border.width: 3
-                    border.color: 'red'
-                    //z: parent.z-1
-                    anchors.centerIn: parent
-                    visible: parent.focus
+                ComboBox{
+                    id: cbCasas
+                    font.pixelSize: app.fs
+                    width: r.width-labelSignosCasas.contentWidth-app.fs
+                    anchors.verticalCenter: parent.verticalCenter
+                    model: ['Seleccionar Casa', '1','2','3','4','5','6','7','8','9','10','11','12']
+                    visible: rb2.checked
+                    onCurrentIndexChanged: {
+                        r.updateData()
+                    }
+                    Rectangle{
+                        width: parent.width+4
+                        height: parent.height+4
+                        color: 'transparent'
+                        border.width: 3
+                        border.color: 'red'
+                        //z: parent.z-1
+                        anchors.centerIn: parent
+                        visible: parent.focus
+                    }
                 }
             }
             Column{
                 id: col2
                 width: r.width
-                spacing: app.fs*2
+                spacing: app.fs*0.25
             }
         }
     }

@@ -9,10 +9,10 @@ ApplicationWindow {
         visibility: Qt.platform.os==='android'?"Maximized":"Windowed"
         width: Qt.platform.os==='android'?Screen.width:300
         height: Qt.platform.os==='android'?Screen.height:600
-        title: 'Mercurio Data para Android'
+        title: 'Quirón'
         color: c1
-        property string moduleName: 'mddg'//Mercurio Data Desktop Gadget
-        property int fs: width*0.05
+        property string moduleName: 'quiron'//Mercurio Data Desktop Gadget
+        property int fs: Qt.platform.os==='android'?width*0.03:width*0.06
         property color c1: 'black'
         property color c2: 'white'
         property color c3: 'red'
