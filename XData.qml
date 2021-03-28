@@ -4,7 +4,7 @@ import QtQuick.Controls 2.0
 Item {
     id: r
     anchors.fill: parent
-    property bool desplegado: cbPlanetas.currentIndex!==0
+    property bool desplegado: xPlanetas.currentIndex!==0//cbPlanetas.currentIndex!==0
     property alias contentY: flick.contentY
     signal flickYChanged()
     Flickable{
@@ -15,16 +15,6 @@ Item {
         property int uContentY: 0
         onContentYChanged: {
            r.flickYChanged()
-            /* if(contentY===0){
-                r.flickYChanged(false)
-                return
-            }
-            if(contentY<uContentY){
-                r.flickYChanged(false)
-            }else{
-                 r.flickYChanged(true)
-            }
-            uContentY=contentY*/
         }
         Column{
             id: col1
@@ -33,6 +23,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: app.fs*2
             Row{
+                visible: false
                 spacing: app.fs*0.5
                 Text{
                     id: labelPlanetas
@@ -61,11 +52,14 @@ Item {
                     }
                 }
             }
-            XPlanetas{id: xPlanetas}
+            XPlanetas{
+                id: xPlanetas
+                onCurrentIndexChanged: updateData()
+            }
             Row{
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: app.fs*2
-                visible: cbPlanetas.currentIndex!==0
+                visible: xPlanetas.currentIndex!==0//cbPlanetas.currentIndex!==0
                 onVisibleChanged: {
                     if(!visible){
                         rb1.checked=false
@@ -194,7 +188,9 @@ Item {
         //Url File Local Data
         //'file:///home/ns/Documentos/unik/quiron/data/neptuno.json'
 
-        let jsonFileUrl='file://'+pws+'/quiron/data/'+cbPlanetas.currentText+'.json'
+        //let jsonFileUrl='file://'+pws+'/quiron/data/'+cbPlanetas.currentText+'.json'
+
+        let jsonFileUrl='file://'+pws+'/quiron/data/'+app.planetas[xPlanetas.currentIndex]+'.json'
         console.log('jsonFileUrl: '+jsonFileUrl)
         request.open('GET', jsonFileUrl, true);
         //request.open('GET', 'https://github.com/nextsigner/quiron/raw/main/data/'+cbPlanetas.currentText+'.json', true);
