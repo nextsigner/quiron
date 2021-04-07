@@ -57,6 +57,7 @@ Item {
                         font.pixelSize: app.fs
                         color: xBotSigno.hovered?app.c1:app.c2
                         anchors.centerIn: parent
+                        anchors.verticalCenterOffset: app.fs*0.25
                     }
             }
         }

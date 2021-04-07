@@ -110,61 +110,6 @@ Item {
                 visible: rb1.checked
                 onCurrentIndexChanged: updateData()
             }
-            /*
-            Row{
-                spacing: app.fs*0.5
-                Text{
-                    id: labelSignosCasas
-                    text: cbSignos.visible?'Signos: ':'Casas: '
-                    font.pixelSize: app.fs
-                    color: app.c2
-                    anchors.verticalCenter: parent.verticalCenter
-                    visible: cbSignos.visible||cbCasas.visible
-                }
-                ComboBox{
-                    id: cbSignos
-                    font.pixelSize: app.fs
-                    width: r.width-labelSignosCasas.contentWidth-app.fs
-                    anchors.verticalCenter: parent.verticalCenter
-                    model: app.signos
-                    visible: rb1.checked
-                    onCurrentIndexChanged: {
-                        r.updateData()
-                    }
-                    Rectangle{
-                        width: parent.width+4
-                        height: parent.height+4
-                        color: 'transparent'
-                        border.width: 3
-                        border.color: 'red'
-                        //z: parent.z-1
-                        anchors.centerIn: parent
-                        visible: parent.focus
-                    }
-                }
-                ComboBox{
-                    id: cbCasas
-                    font.pixelSize: app.fs
-                    width: r.width-labelSignosCasas.contentWidth-app.fs
-                    anchors.verticalCenter: parent.verticalCenter
-                    model: ['Seleccionar Casa', '1','2','3','4','5','6','7','8','9','10','11','12']
-                    visible: rb2.checked
-                    onCurrentIndexChanged: {
-                        r.updateData()
-                    }
-                    Rectangle{
-                        width: parent.width+4
-                        height: parent.height+4
-                        color: 'transparent'
-                        border.width: 3
-                        border.color: 'red'
-                        //z: parent.z-1
-                        anchors.centerIn: parent
-                        visible: parent.focus
-                    }
-                }
-            }
-            */
             Column{
                 id: col2
                 width: r.width
@@ -180,9 +125,7 @@ Item {
         getJSON()
     }
     function setData(json){
-        //let tipo=cbSignos.visible?'s':'h'
         let tipo=xSignos.visible?'s':'h'
-        //let num=cbSignos.visible?cbSignos.currentIndex:cbCasas.currentIndex
         let num=xSignos.visible?xSignos.currentIndex:parseInt(xCasas.currentIndex + 1)
         let data=json[tipo+''+num]
         if(!data){
