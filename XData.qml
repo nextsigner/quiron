@@ -14,14 +14,14 @@ Item {
         contentHeight: col1.height+app.fs*8
         property int uContentY: 0
         onContentYChanged: {
-           r.flickYChanged()
+            r.flickYChanged()
         }
         Column{
             id: col1
             anchors.top: parent.top
             anchors.topMargin: app.fs*5
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: app.fs*2
+            spacing: app.fs
             Row{
                 visible: false
                 spacing: app.fs*0.5
@@ -59,6 +59,7 @@ Item {
             Row{
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: app.fs*2
+                //visible: false
                 visible: xPlanetas.currentIndex!==0//cbPlanetas.currentIndex!==0
                 onVisibleChanged: {
                     if(!visible){
@@ -99,6 +100,17 @@ Item {
                     }
                 }
             }
+            XCasas{
+                id:xCasas
+                visible: rb2.checked
+                onCurrentIndexChanged: updateData()
+            }
+            XSignos{
+                id: xSignos
+                visible: rb1.checked
+                onCurrentIndexChanged: updateData()
+            }
+            /*
             Row{
                 spacing: app.fs*0.5
                 Text{
@@ -152,6 +164,7 @@ Item {
                     }
                 }
             }
+            */
             Column{
                 id: col2
                 width: r.width
@@ -167,8 +180,10 @@ Item {
         getJSON()
     }
     function setData(json){
-        let tipo=cbSignos.visible?'s':'h'
-        let num=cbSignos.visible?cbSignos.currentIndex:cbCasas.currentIndex
+        //let tipo=cbSignos.visible?'s':'h'
+        let tipo=xSignos.visible?'s':'h'
+        //let num=cbSignos.visible?cbSignos.currentIndex:cbCasas.currentIndex
+        let num=xSignos.visible?xSignos.currentIndex:parseInt(xCasas.currentIndex + 1)
         let data=json[tipo+''+num]
         if(!data){
             return
@@ -211,8 +226,8 @@ Item {
         request.send()
     }
     function reset(){
-        cbSignos.currentIndex=0
-        cbCasas.currentIndex=0
+        xSignos.currentIndex=0
+        xCasas.currentIndex=0
         rb1.checked=false
         rb2.checked=false
         updateData()
@@ -232,7 +247,7 @@ Item {
     }
     function a3(){
         rb2.checked=true
-        cbCasas.focus=true
+        //cbCasas.focus=true
         updateData()
     }
 }
