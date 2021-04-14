@@ -126,7 +126,7 @@ Item {
     }
     function setData(json){
         let tipo=xSignos.visible?'s':'h'
-        let num=xSignos.visible?xSignos.currentIndex:parseInt(xCasas.currentIndex + 1)
+        let num=xSignos.visible?parseInt(xSignos.currentIndex +1):parseInt(xCasas.currentIndex + 1)
         let data=json[tipo+''+num]
         if(!data){
             return
