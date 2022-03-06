@@ -156,7 +156,7 @@ Item {
             if (request.readyState === XMLHttpRequest.DONE) {
                 if (request.status && request.status === 200) {
                     console.log("response", request.responseText)
-                    var result = JSON.parse(request.responseText)
+                    var result = JSON.parse(request.responseText.replace(/\n/g, ''))
                     if(result){
                         setData(result)
                     }
